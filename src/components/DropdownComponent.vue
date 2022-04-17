@@ -1,7 +1,6 @@
 <template>
     <div>
         <ul
-                :class="showMenu ? 'flex' : 'hidden'"
                 class="
           flex-col
           mt-8
@@ -13,8 +12,8 @@
                 <div class="relative">
                     <!-- Dropdown toggle button -->
                     <button
-                            @click="show = !show"
-                            @mouseover="show = !show"
+                            @click="toggleShow(show)"
+                            @mouseover="toggleShow(show)"
                             class="flex items-center text-indigo-100 bg-indigo-600 rounded-md focus:outline-none p-2"
                     >
                         <span class="mr-4">{{ selectedBreed ?? 'Breeds' }}</span>
@@ -46,21 +45,21 @@
                             :class="{ 'h-52 py-2': show }"
                     >
 
-                            <div
-                                    :key="breed.id"
-                                    v-show="show"
-                                    v-for="breed in breeds"
-                                    @click="selectBreed(breed.id, breed.name)"
-                                    class="
+                        <div
+                                :key="breed.id"
+                                v-show="show"
+                                v-for="breed in breeds"
+                                @click="selectBreed(breed.id, breed.name)"
+                                class="
                   block
                   px-4
                   py-2
                   text-sm text-indigo-100
                   hover:bg-indigo-400 hover:text-indigo-100
                 "
-                            >
-                                {{breed.name}}
-                            </div>
+                        >
+                            {{breed.name}}
+                        </div>
 
                         <!--<router-link
                                 to="/"
@@ -80,20 +79,35 @@
     </div>
 </template>
 <script setup lang="ts">
-    import {computed, reactive, ref} from 'vue';
-    import {getBreeds} from '@/services/cats-api/getBreeds'
+    import {ref, toRefs} from 'vue'
 
-    let showMenu = ref<boolean>(false);
-    let show = ref<boolean>(false);
-    let selectedBreed = ref<string | null>(null);
+    interface Props {
+        breeds: IBreed,
+        selectedBreed: (string | null),
+        show: boolean,
+    }
 
-    const toggleNav = () => (showMenu.value = !showMenu.value);
-    const apiResponse = await getBreeds();
-    //console.log(await getBreeds())
-    const breeds = computed(() => reactive(apiResponse))
+    const props = defineProps<Props>()
+
+    const {breeds, show} = toRefs(props)
+
+    interface Emits {
+        (e: 'breed-change', index: object): void,
+
+        (e: 'show-toggle', arg: boolean): void,
+    }
+
+    const emit = defineEmits<Emits>()
+
+    const breedChange = (arg: object) => emit('breed-change', arg)
+    const toggleShow = (arg: boolean) => emit('show-toggle', !arg)
 
     let selectBreed = (id: number, name: string) => {
-        show.value = !show
-        selectedBreed.value = name
+        let breedData = <BreedResource>{
+            id: id,
+            name: name,
+        }
+        toggleShow(!show)
+        breedChange(breedData)
     }
 </script>
