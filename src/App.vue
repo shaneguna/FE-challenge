@@ -16,6 +16,9 @@
         <div class="wrapper">
             <Suspense>
                 <HomePage/>
+                <template #fallback>
+                    <ContentSkeleton />
+                </template>
             </Suspense>
             <nav>
                 <!--<RouterLink to="/">Home</RouterLink>

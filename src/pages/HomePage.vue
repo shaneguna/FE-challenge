@@ -16,15 +16,12 @@
             <div>
                 <DropdownComponent :show="show" :breeds="breeds" :selectedBreed="selectedBreedResource.name"
                                    @show-toggle="onShowToggle" @breed-change="onBreedChange"/>
-                <!--<template #fallback>
-                   @TODO <ContentSkeleton />
-                </template>-->
-
             </div>
         </div>
     </div>
 </template>
 <script setup lang="ts">
+    import ContentSkeleton from "@/components/ContentSkeleton.vue";
     import DropdownComponent from "@/components/DropdownComponent.vue";
     import {computed, onMounted, reactive, Ref, ref} from 'vue';
     import {getBreeds} from '@/services/cats-api/getBreeds'
