@@ -1,5 +1,5 @@
-import { CONFIG } from '../config'
-import FetchRequest from '../utils/fetch'
+import { CONFIG } from '../../config'
+import FetchRequest from '../../utils/fetch'
 
 //export const limit = 5
 

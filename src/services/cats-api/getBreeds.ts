@@ -1,5 +1,5 @@
-import { request } from '../index'
+import { request } from './index'
 
-export function getBreeds (): Promise<Breeds> {
-    return request.get<BreedsResponse>(`/breeds/`).then(res => res.breeds)
+export function getBreeds (): Promise<IBreedsResponse> {
+    return request.get<IBreedsResponse>('/breeds')
 }
