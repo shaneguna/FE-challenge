@@ -1,4 +1,6 @@
 declare interface BreedResource {
-    id: number,
+    id: string,
     name: string,
 }
+
+export type { BreedResource }

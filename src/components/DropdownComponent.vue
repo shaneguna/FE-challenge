@@ -1,16 +1,54 @@
+<script setup lang="ts">
+    import {toRefs} from 'vue'
+    import {useStore} from '@/store';
+    import {BreedResource} from '@/types/resources/breed-resource'
+    import {IBreedsResponse} from "@/types/responses/breed-response";
+    import {CatMutationTypes} from "@/store/modules/cats/mutation-types";
+
+    let store = useStore()
+
+    interface Props {
+        breeds: IBreedsResponse,
+        selectedBreed: (string | null),
+        show: boolean,
+    }
+
+    interface Emits {
+        (e: 'breed-change', breedData: object): void,
+
+        (e: 'show-toggle', arg: boolean): void,
+    }
+
+    const props = defineProps<Props>()
+    const emit = defineEmits<Emits>()
+
+    const {breeds, show} = toRefs(props)
+    const breedChange = (arg: object) => emit('breed-change', arg)
+    const toggleShow = (arg: boolean) => emit('show-toggle', !arg)
+
+    let selectBreed = (id: string, name: string) => {
+        let breedData = <BreedResource>{
+            id: id,
+            name: name,
+        }
+        toggleShow(!show)
+        breedChange(breedData)
+        store.commit(CatMutationTypes.SET_CURRENT_PAGE, 1)
+        store.commit(CatMutationTypes.SET_BREED_ID, id)
+    }
+</script>
 <template>
     <div>
         <ul
                 class="
-          flex-col
-          mt-8
-          space-y-4
-          md:flex md:space-y-0 md:flex-row md:items-center md:space-x-10 md:mt-2
-        "
+                  flex-col
+                  mt-8
+                  space-y-4
+                  md:flex md:space-y-0 md:flex-row md:items-center md:space-x-10 md:mt-2
+                "
         >
             <li>
                 <div class="relative">
-                    <!-- Dropdown toggle button -->
                     <button
                             @click="toggleShow(show)"
                             @mouseover="toggleShow(show)"
@@ -31,83 +69,38 @@
                         </svg>
                     </button>
 
-                    <!-- Dropdown menu -->
                     <div
                             class="
-                mt-2
-                bg-indigo-500
-                rounded-md
-                shadow-xl
-                lg:right-0
-                w-44
-                overflow-auto
-              "
+                                mt-2
+                                bg-indigo-500
+                                rounded-md
+                                shadow-xl
+                                lg:right-0
+                                w-44
+                                overflow-auto
+                              "
                             :class="{ 'h-52 py-2': show }"
+                            @mouseleave="toggleShow(show)"
                     >
-
-                        <div
-                                :key="breed.id"
-                                v-show="show"
-                                v-for="breed in breeds"
-                                @click="selectBreed(breed.id, breed.name)"
-                                class="
-                  block
-                  px-4
-                  py-2
-                  text-sm text-indigo-100
-                  hover:bg-indigo-400 hover:text-indigo-100
-                "
-                        >
-                            {{breed.name}}
+                        <div v-show="show">
+                            <div
+                                    :key="breed.id"
+                                    v-for="breed in breeds"
+                                    @click="selectBreed(breed.id, breed.name)"
+                                    class="
+                                      block
+                                      px-4
+                                      py-2
+                                      text-sm text-indigo-100
+                                      hover:bg-indigo-400 hover:text-indigo-100
+                                    "
+                            >
+                                {{breed.name}}
+                            </div>
                         </div>
-
-                        <!--<router-link
-                                to="/"
-                                class="
-                  block
-                  px-4
-                  py-2
-                  text-sm text-indigo-100
-                  hover:bg-indigo-400 hover:text-indigo-100
-                "
-                        >
-                        </router-link>-->
                     </div>
                 </div>
             </li>
         </ul>
     </div>
 </template>
-<script setup lang="ts">
-    import {ref, toRefs} from 'vue'
-
-    interface Props {
-        breeds: IBreed,
-        selectedBreed: (string | null),
-        show: boolean,
-    }
-
-    const props = defineProps<Props>()
-
-    const {breeds, show} = toRefs(props)
-
-    interface Emits {
-        (e: 'breed-change', index: object): void,
-
-        (e: 'show-toggle', arg: boolean): void,
-    }
-
-    const emit = defineEmits<Emits>()
-
-    const breedChange = (arg: object) => emit('breed-change', arg)
-    const toggleShow = (arg: boolean) => emit('show-toggle', !arg)
-
-    let selectBreed = (id: number, name: string) => {
-        let breedData = <BreedResource>{
-            id: id,
-            name: name,
-        }
-        toggleShow(!show)
-        breedChange(breedData)
-    }
-</script>
