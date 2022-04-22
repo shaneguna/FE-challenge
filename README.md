@@ -18,6 +18,28 @@ Register and get an api key from https://docs.thecatapi.com/
 
 This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
 
+# What's used?
+
+- [x] [Vite](https://github.com/vitejs/vite)
+- [x] [Composition API](https://composition-api.vuejs.org/)
+- [x] [SFC \<script setup> sugar](https://v3.vuejs.org/api/sfc-script-setup.html)
+- [x] [Suspense](https://v3.vuejs.org/guide/component-dynamic-async.html#using-with-suspense) (Experimental)
+- [x] [Vue router](https://next.router.vuejs.org/)
+- [x] State management ([Vuex 4](https://vuex.vuejs.org/) (store extension implemented)))
+- [x] Type system [TypeScript](https://www.typescriptlang.org/) [Vue tsc](https://github.com/johnsoncodehk/vue-tsc)
+- [x] Linter [ESLint](https://eslint.vuejs.org/)
+- [x] Tailwind [Tailwind](https://tailwindcss.com/docs/)
+- [ ] Unit test
+- [ ] E2E test
+
+# Getting started
+
+```shell script
+npm install
+# Development
+npm run dev
+```
+
 ## Recommended IDE Setup
 
 - [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=johnsoncodehk.volar)
