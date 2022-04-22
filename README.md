@@ -5,7 +5,7 @@ Developer: Shane Gunawardana `shanechioguna@gmail.com`
 
 # Configuration
 
-Copy and rename `.env.example` to `env` and add appropriate values.
+Copy and rename `.env.example` to `.env` and add appropriate values.
 
 | Variable | Description | Default Value
 | --- | --- | :---:
