@@ -26,7 +26,7 @@ This template should help get you started developing with Vue 3 and TypeScript i
 - [x] [Suspense](https://v3.vuejs.org/guide/component-dynamic-async.html#using-with-suspense) (Experimental)
 - [x] [Vue router](https://next.router.vuejs.org/)
 - [x] State management ([Vuex 4](https://vuex.vuejs.org/) (store extension implemented)))
-- [x] Type system [TypeScript](https://www.typescriptlang.org/) [Vue tsc](https://github.com/johnsoncodehk/vue-tsc)
+- [x] Type system [TypeScript](https://www.typescriptlang.org/)
 - [x] Linter [ESLint](https://eslint.vuejs.org/)
 - [x] Tailwind [Tailwind](https://tailwindcss.com/docs/)
 - [ ] Unit test
