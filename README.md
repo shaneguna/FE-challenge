@@ -1,8 +1,6 @@
 This app integrates TheCatAPI
 https://thecatapi.com/
 
-Developer: Shane Gunawardana `shanechioguna@gmail.com`
-
 # Configuration
 
 Copy and rename `.env.example` to `.env` and add appropriate values.
